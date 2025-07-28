@@ -9,18 +9,6 @@ terraform {
   }
 }
 
-
-
-# data "aws_vpc" "default" {
-#   default = true
-# }
-
-# data "aws_subnets" "default" {
-#   filter {
-#     name   = "vpc-id"
-#     values = [data.aws_vpc.default.id]
-#   }
-# }
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.1.0"
@@ -105,8 +93,4 @@ resource "aws_security_group" "eks_api_sg" {
   }
 }
 
-
-output "oidc_provider_arn" {
-  value = module.eks.oidc_provider_arn
-}
 
