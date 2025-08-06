@@ -31,7 +31,6 @@ resource "aws_instance" "kubectl_machine" {
   vpc_security_group_ids = [aws_security_group.kubectl_sg.id]
   associate_public_ip_address = true
   key_name               = "uthmanakz" # Replace with your EC2 key pair name
-  iam_instance_profile   = data.aws_iam_instance_profile.kubectl_profile.name
 
   tags = {
     Name = "kubectl-bastion"
