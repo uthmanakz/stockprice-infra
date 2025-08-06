@@ -70,6 +70,7 @@ module "eks" {
   }
 
   enable_irsa = true
+
 }
 
 resource "aws_security_group" "eks_api_sg" {
