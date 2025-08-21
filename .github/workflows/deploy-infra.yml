@@ -54,5 +54,5 @@ jobs:
       - name: SSH into kubectl-node and run infra-svc repo
         run: |
           KUBECTL_HOST=$(terraform output -raw kubectl_public_ip)
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@$KUBECTL_HOST ec2-user
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@$KUBECTL_HOST
 
