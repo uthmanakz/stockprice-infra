@@ -45,11 +45,6 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
 
-      - name: SSH into kubectl-node and run infra-svc repo
-        run: |
-          KUBECTL_HOST=$(terraform output -raw kubectl_public_ip)
-          ssh -i key.pem ec2-user@$KUBECTL_HOST
-
       - name: Set up SSH key
         run: |
          mkdir -p ~/.ssh
