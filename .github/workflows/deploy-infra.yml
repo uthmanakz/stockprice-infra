@@ -51,8 +51,24 @@ jobs:
          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/kubectl-key.pem
          chmod 600 ~/.ssh/kubectl-key.pem
 
-      - name: SSH into kubectl-node and run infra-svc repo
+      - name: SSH into kubectl-node and apply infra-svc
         run: |
+          set -e
           KUBECTL_HOST=$(terraform output -raw kubectl_public_ip)
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@$KUBECTL_HOST
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@$KUBECTL_HOST << 'EOF'
+            set -e
+            cd ~
+            if [ ! -d "stockprice-infra-svc" ]; then
+              git clone https://github.com/uthmanakz/stockprice-infra-svc.git
+            else
+              cd stockprice-infra-svc
+              git pull
+              cd ..
+            fi
+            cd stockprice-infra-svc
+            terraform init -input=false
+            terraform apply -auto-approve
+            EOF
+
+
 
