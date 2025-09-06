@@ -54,7 +54,7 @@ jobs:
         run: |
           set -e
           KUBECTL_HOST=$(terraform output -raw kubectl_public_ip)
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem root@"$KUBECTL_HOST" <<'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@"$KUBECTL_HOST" <<'EOF'
           set -e
           cd ~
           if [ ! -d "stockprice-infra-svc" ]; then
