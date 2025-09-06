@@ -29,12 +29,12 @@ module "vpc" {
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"
-    "kubernetes.io/cluster/my-eks-cluster" = "shared"
+    "kubernetes.io/cluster/stockprice" = "shared"
   }
 
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb" = "1"
-    "kubernetes.io/cluster/my-eks-cluster" = "shared"
+    "kubernetes.io/cluster/stockprice" = "shared"
   }
 }
 
