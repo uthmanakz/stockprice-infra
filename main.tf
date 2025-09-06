@@ -57,20 +57,17 @@ module "eks" {
   cluster_additional_security_group_ids = [aws_security_group.eks_api_sg.id]
 
 
-
-
-  eks_managed_node_groups = {
-    default = {
-      desired_capacity = 3
-      max_capacity     = 3
-      min_capacity     = 3
-
-      instance_types = ["t3.medium"]
-    }
-  }
-
   enable_irsa = true
 
+ eks_managed_node_groups = {
+  default = {
+    min_size      = 3
+    desired_size  = 3
+    max_size      = 3
+
+    instance_types = ["t3.medium"]
+  }
+}
 }
 
 resource "aws_security_group" "eks_api_sg" {
