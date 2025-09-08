@@ -64,6 +64,7 @@ jobs:
             git pull
             cd ..
           fi
+          aws eks update-kubeconfig --name stockprice --region eu-west-2
           cd stockprice-infra-svc
           terraform init -input=false
           terraform apply -auto-approve
