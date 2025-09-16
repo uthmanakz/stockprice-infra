@@ -73,6 +73,6 @@ jobs:
       - name: Git clone argocd application repo and deploy it
         run: |
           KUBECTL_HOST=$(terraform output -raw kubectl_public_ip)
-          ssh -o StrictHostKeyChecking=no -i .ssh/kubectl-key.pem ec2-user@"$KUBECTL_HOST" '
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@"$KUBECTL_HOST" '
           git clone https://github.com/uthmanakz/stockprice-gitops.git \
           cd stockprice-gitops && kubectl apply -f application.yaml'
