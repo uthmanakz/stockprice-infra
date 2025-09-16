@@ -77,6 +77,6 @@ jobs:
          set -e
          git clone https://github.com/uthmanakz/stockprice-gitops.git
          cd stockprice-gitops
-         kubectl apply -f application.yaml
+         kubectl apply -f application.yml
          EOF
 
