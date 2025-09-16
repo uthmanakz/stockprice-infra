@@ -75,8 +75,15 @@ jobs:
          KUBECTL_HOST=$(terraform output -raw kubectl_public_ip)
          ssh -o StrictHostKeyChecking=no -i ~/.ssh/kubectl-key.pem ec2-user@"$KUBECTL_HOST" << 'EOF'
          set -e
-         git clone https://github.com/uthmanakz/stockprice-gitops.git
-         cd stockprice-gitops
-         kubectl apply -f application.yml
+         cd ~
+         if [ ! -d "stockprice-gitops" ]; then
+          git clone https://github.com/uthmanakz/stockprice-gitops.git
+         else
+          cd stockprice-gitops
+          git pull
+          cd ..
+         fi
+         kubectl apply -f stockprice-gitops/application.yml
          EOF
+
 
